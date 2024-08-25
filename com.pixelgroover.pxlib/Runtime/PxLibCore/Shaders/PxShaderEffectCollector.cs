@@ -66,6 +66,7 @@ public class PxShaderEffectCollector : MonoBehaviour
         var allParams = new List<ShaderParamWrapper>();
         foreach (var effect in activeEffects)
         {
+            if(effect == null || effect.shaderParams == null) continue;
             LifecycleLog($"adding params from {effect}");
             allParams.AddRange(effect.shaderParams.Select(x => new ShaderParamWrapper
             {
