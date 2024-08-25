@@ -1,6 +1,6 @@
 {
   "name": "com.pixelgroover.pxlib",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "displayName": "PxLib",
   "description": "Utilities and tools for making games faster",
   "unity": "2022.3",
