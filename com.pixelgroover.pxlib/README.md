@@ -41,7 +41,7 @@ Clone the repository as a sibling to your unity project folder. If your unity pr
 git clone PxLib git@github.com:dsmiller95/PxLib.git
 ```
 
-Then add `"com.pixelgroover.pxlib": "../../PxLib/com.pixelgroover.pxlib"` to your unity project's Packages/manifest.json 
+Then add `"com.pixelgroover.pxlib": "file:../../PxLib/com.pixelgroover.pxlib"` to your unity project's Packages/manifest.json 
 to reference the cloned repository via a relative filepath. 
 
 Make any changes as required to the PxLib library, then optionally submit your changes up to this repository via a fork.
