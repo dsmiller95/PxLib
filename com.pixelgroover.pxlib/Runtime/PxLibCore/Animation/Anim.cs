@@ -22,6 +22,17 @@ public class Anim : ScriptableObject
         get => _frameRate;
         set => _frameRate = value;
     }
+    
+    public bool OverrideSortingLayer
+    {
+        get => _overrideSortingLayer;
+        set => _overrideSortingLayer = value;
+    }
+    public int SortingLayer
+    {
+        get => _sortingLayer;
+        set => _sortingLayer = value;
+    }
 
 
     public int FrameCount => _frames.Count;
@@ -31,11 +42,13 @@ public class Anim : ScriptableObject
         set => _frames = value;
     }
     public AudioClip Sfx => _sfx;
+    public bool AllowSfxOverlap => allowSfxOverlap;
     [SerializeField] private float _frameRate = 12;
     [SerializeField] private bool _loop = false;
+    [SerializeField] private bool _overrideSortingLayer = false;
+    [SerializeField] private int _sortingLayer = 0;
     [SerializeField] private List<Sprite> _frames;
 
     [SerializeField] private AudioClip _sfx;
-
-
+    [SerializeField] private bool allowSfxOverlap = false;
 }

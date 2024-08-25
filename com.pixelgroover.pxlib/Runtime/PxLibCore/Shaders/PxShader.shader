@@ -1,4 +1,5 @@
-﻿Shader "PxShader"
+﻿
+Shader "PxShader"
 {
 	Properties
 	{
@@ -25,6 +26,13 @@
 		[PerRendererData] _TransparencyCutoff("TransparencyCutoff", float) = 0
 		[PerRendererData] _TransCutoffPos("TransCutoffPos", Range(0, 1)) = 0
 		[PerRendererData] _TransCutoffGradient("TransCutoffGradient", Range(0, 1)) = 0
+		//Stencil Props
+		_StencilComp ("Stencil Comparison", Float) = 8.000000
+		_Stencil ("Stencil ID", Float) = 0.000000
+		_StencilOp ("Stencil Operation", Float) = 0.000000
+		_StencilWriteMask ("Stencil Write Mask", Float) = 255.000000
+		_StencilReadMask ("Stencil Read Mask", Float) = 255.000000
+		_ColorMask ("Color Mask", Float) = 15.000000
 			//Lerp Tween
 			//_SecondTex("Second Texture", 2D) = "white" {}
 			//_Tween("Tween", Range(0, 1)) = 0
@@ -44,16 +52,27 @@
 
 			Pass
 			{
-				Blend SrcAlpha OneMinusSrcAlpha 
-				Cull Off
 				ZWrite Off
+				Cull Off
 				//ZTest On
+				
+	            Stencil
+	            {
+					Ref [_Stencil]
+					ReadMask [_StencilReadMask]
+					WriteMask [_StencilWriteMask]
+					Comp [_StencilComp]
+					Pass [_StencilOp]
+	            }
+				Blend SrcAlpha OneMinusSrcAlpha
+				ColorMask [_ColorMask]
+				
+				
 				CGPROGRAM
 				#include "UnityCG.cginc"
 				#pragma multi_compile_instancing
 				#pragma vertex vert
 				#pragma fragment frag
-
 
 				struct appdata
 				{
@@ -73,8 +92,8 @@
 					v2f o;
 
 					//v.vertex.x += 20 * sin(_Time  * 200);
-					o.vertex = UnityObjectToClipPos(v.vertex);								
-					o.uv = v.uv;		
+					o.vertex = UnityObjectToClipPos(v.vertex);
+					o.uv = v.uv;
 					return o;
 				}
 				//Pass to Frag

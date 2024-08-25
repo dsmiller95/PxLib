@@ -33,6 +33,10 @@ public class PxAnimator : MonoBehaviour
             OnSpriteChange?.Invoke(value);
         }
     }
+    private int SortingLayer
+    {
+        set => SpriteRenderer.sortingOrder = value;
+    }
 
     //Variables
     private SpriteRenderer _spriteRenderer;
@@ -79,9 +83,13 @@ public class PxAnimator : MonoBehaviour
         CurrentFrameIndex = -1;
         NextFrameTime = Time.time;
         Playing = true;
+        if (CurrentAnim.OverrideSortingLayer)
+        {
+            SortingLayer = CurrentAnim.SortingLayer;
+        }
         if (anim.Sfx)
         {
-            PlaySfx(anim.Sfx);
+            PlaySfx(anim.Sfx, anim.AllowSfxOverlap);
         }
     }
     public void SetFrame(Anim anim, int framePosition)
@@ -111,9 +119,9 @@ public class PxAnimator : MonoBehaviour
         }
     }
     //Private Methods
-    private void PlaySfx(AudioClip sfx)
+    private void PlaySfx(AudioClip sfx, bool allowOverlap)
     {
-        PxAudioPlayer.PlaySfx(sfx);
+        PxAudioPlayer.PlaySfx(sfx, allowOverlap);
     }
     
     private void Trace(string message)

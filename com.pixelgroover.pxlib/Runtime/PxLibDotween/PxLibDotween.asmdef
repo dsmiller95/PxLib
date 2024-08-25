@@ -1,0 +1,18 @@
+{
+    "name": "PxLibDotween",
+    "rootNamespace": "PxLib.Dotween",
+    "references": [
+        "GUID:87cfc23235259d44faaec21b145f8a35"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "DOTWEEN"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

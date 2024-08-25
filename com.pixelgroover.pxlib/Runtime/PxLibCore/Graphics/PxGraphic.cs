@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PxAnimator))]
-[RequireComponent(typeof(PxSpriteShader))]
+[RequireComponent(typeof(PxShaderController))]
 public class PxGraphic : MonoBehaviour
 {
     public Sprite Sprite
@@ -18,6 +18,6 @@ public class PxGraphic : MonoBehaviour
     private PxAnimator _animator;
     public SpriteRenderer SpriteRenderer => _spriteRenderer ? _spriteRenderer : (_spriteRenderer = GetComponent<SpriteRenderer>());
     private SpriteRenderer _spriteRenderer;
-    public PxSpriteShader Shader => _shader ? _shader : (_shader = GetComponent<PxSpriteShader>());
-    private PxSpriteShader _shader;
+    public PxShaderController Shader => _shader ? _shader : (_shader = GetComponent<PxShaderController>());
+    private PxShaderController _shader;
 }
