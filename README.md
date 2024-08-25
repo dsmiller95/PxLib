@@ -20,9 +20,9 @@ A suite of tools useful when kickstarting a new unity project. Of particular not
 
 
 ## Install via Git Url
-Requires a version of unity that supports path query parameter for git packages (Unity >= 2019.3.4f1, Unity >= 2020.1a21). You can add https://github.com/dsmiller95/PxLib.git?path=com.pixelgroover.pxlib to Package Manager
+Requires a version of unity that supports path query parameter for git packages (Unity >= 2019.3.4f1, Unity >= 2020.1a21). You can add `https://github.com/dsmiller95/PxLib.git?path=com.pixelgroover.pxlib` to Package Manager
 
-or add "com.pixelgroover.pxlib": "https://github.com/dsmiller95/PxLib.git?path=com.pixelgroover.pxlib" to Packages/manifest.json.
+or add `"com.pixelgroover.pxlib": "https://github.com/dsmiller95/PxLib.git?path=com.pixelgroover.pxlib"` to Packages/manifest.json.
 
 
 ## Install via Openupm
@@ -41,7 +41,7 @@ Clone the repository as a sibling to your unity project folder. If your unity pr
 git clone PxLib git@github.com:dsmiller95/PxLib.git
 ```
 
-Then add `"com.pixelgroover.pxlib": "file:../../PxLib/com.pixelgroover.pxlib"` to your unity project's Packages/manifest.json 
-to reference the cloned repository via a relative filepath. 
+Then add `"com.pixelgroover.pxlib": "file:../../PxLib/com.pixelgroover.pxlib"` to your unity project's Packages/manifest.json
+to reference the cloned repository via a relative filepath.
 
 Make any changes as required to the PxLib library, then optionally submit your changes up to this repository via a fork.
