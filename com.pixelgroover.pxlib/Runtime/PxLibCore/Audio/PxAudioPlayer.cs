@@ -144,14 +144,18 @@ public static class PxAudioPlayer
     #endregion
 
     #region SFX
-    public static void PlaySfx(AudioClip sfx, bool allowOverlap = true)
+
+    public static void PlaySfx(AudioClip sfx, bool allowOverlap = true) => PlaySfx(sfx.ToPxData(), allowOverlap);
+
+    public static void PlaySfx(PxAudioClip sfx, bool allowOverlap = true) => PlaySfx((sfx == null ? null : sfx.clipData), allowOverlap);
+    public static void PlaySfx(PxAudioClipData sfx, bool allowOverlap = true)
     {
         if (!allowOverlap)
         {
             // search for a player playing this effect already
             foreach (var player in SfxPlayers)
             {
-                if (player.isPlaying && player.clip == sfx)
+                if (player.isPlaying && player.clip == sfx.clip)
                 {
                     return;
                 }
@@ -167,17 +171,19 @@ public static class PxAudioPlayer
         }
         if (sfxPlayer == null) return;
 
-        sfxPlayer.clip = sfx;
+        sfxPlayer.clip = sfx.clip;
+        sfxPlayer.volume = sfx.volume;
         sfxPlayer.pitch = _audioSourceManager.GetSemitoneMultiplier();
         sfxPlayer.Play();
     }
     
-    public static void PlaySfxDelayed(AudioClip sfx, float delay, bool allowOverlap = true)
+    public static void PlaySfxDelayed(AudioClip sfx, float delay, bool allowOverlap = true) => PlaySfxDelayed(sfx.ToPxData(), delay, allowOverlap);
+    public static void PlaySfxDelayed(PxAudioClipData sfx, float delay, bool allowOverlap = true)
     {
         _audioSourceManager.StartCoroutine(IEPlaySfxDelayed(sfx, delay, allowOverlap));
     }
     
-    private static IEnumerator IEPlaySfxDelayed(AudioClip sfx, float delay, bool allowOverlap)
+    private static IEnumerator IEPlaySfxDelayed(PxAudioClipData sfx, float delay, bool allowOverlap)
     {
         yield return new WaitForSeconds(delay);
         PlaySfx(sfx, allowOverlap);
