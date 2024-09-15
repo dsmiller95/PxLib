@@ -147,9 +147,14 @@ public static class PxAudioPlayer
 
     public static void PlaySfx(AudioClip sfx, bool allowOverlap = true) => PlaySfx(sfx.ToPxData(), allowOverlap);
 
-    public static void PlaySfx(PxAudioClip sfx, bool allowOverlap = true) => PlaySfx((sfx == null ? null : sfx.clipData), allowOverlap);
+    public static void PlaySfx(PxAudioClip sfx, bool allowOverlap = true)
+    {
+        if (sfx == null) return;
+        PlaySfx((sfx.clipData), allowOverlap);  
+    } 
     public static void PlaySfx(PxAudioClipData sfx, bool allowOverlap = true)
     {
+        if (sfx == null) return;
         if (!allowOverlap)
         {
             // search for a player playing this effect already
