@@ -14,8 +14,10 @@ public class PxAudioSourceManager : MonoBehaviour
     public AudioSource BgmPlayer => _bgmPlayer;
     public AudioSource BgmBlendPlayer => _bgmBlendPlayer;
 
+
     [SerializeField] private AudioMixerGroup sfxMixerGroup;
     [SerializeField] private AudioMixerGroup bgmMixerGroup;
+    [SerializeField] private int[] sfxSemitones = { 0 };
     
     [SerializeField] private List<AudioSource> _sfxPlayers;
     [SerializeField] private AudioSource _bgmPlayer;
@@ -76,4 +78,13 @@ public class PxAudioSourceManager : MonoBehaviour
         _instance._bgmPlayer = CreateBgmAudioSource();
         _instance._bgmBlendPlayer = CreateBgmAudioSource();
     }
+    
+    public float GetSemitoneMultiplier()
+    {
+        if (sfxSemitones.Length <= 0) return 1;
+        
+        int semitoneIndex = Random.Range(0, sfxSemitones.Length);
+        return Mathf.Pow(1.059463f, sfxSemitones[semitoneIndex]);
+    }
+
 }

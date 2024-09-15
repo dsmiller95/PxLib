@@ -157,22 +157,26 @@ public static class PxAudioPlayer
                 }
             }
         }
+
+        AudioSource sfxPlayer = null;
         for (int i = 0; i < SfxPlayers.Count - 1; i++)
         {
-            if (!SfxPlayers[i].isPlaying)
-            {
-                SfxPlayers[i].clip = sfx;
-                SfxPlayers[i].Play();
-                return;
-            }
+            if(SfxPlayers[i].isPlaying) continue;
+            sfxPlayer = SfxPlayers[i];
+            break;
         }
+        if (sfxPlayer == null) return;
+
+        sfxPlayer.clip = sfx;
+        sfxPlayer.pitch = _audioSourceManager.GetSemitoneMultiplier();
+        sfxPlayer.Play();
     }
     
     public static void PlaySfxDelayed(AudioClip sfx, float delay, bool allowOverlap = true)
     {
         _audioSourceManager.StartCoroutine(IEPlaySfxDelayed(sfx, delay, allowOverlap));
     }
-
+    
     private static IEnumerator IEPlaySfxDelayed(AudioClip sfx, float delay, bool allowOverlap)
     {
         yield return new WaitForSeconds(delay);
