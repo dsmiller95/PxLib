@@ -266,10 +266,10 @@ public class PxShaderController: MonoBehaviour
     {
         UpdateSprite();
     }
-    private void Update()
-    {
-        UpdateSprite();
-    }
+    // private void Update()
+    // {
+    //     UpdateSprite();
+    // }
     private void OnValidate()
     {
         UpdateSprite();
