@@ -17,18 +17,19 @@ public class PxImageShader : MonoBehaviour, IHavePxShaderMaterial
     [SerializeField] private Shader baseShader;
 
     private static readonly string InstancedMaterialName = $"{nameof(PxImageShader)} instanced material";
+    private Material _cachedMaterial;
     Material ImageInstancedMaterial
     {
         get
         {
-            if (!Image.material || Image.material.name != InstancedMaterialName)
+            if (!Image.material || Image.material.shader != baseShader)
             {
                 // ensure the base material of the image is using the pxlib shader
-                var newMaterial = new Material(baseShader)
+                if(_cachedMaterial == null) _cachedMaterial = new Material(baseShader)
                 {
                     name = InstancedMaterialName
                 };
-                Image.material = newMaterial;
+                Image.material = _cachedMaterial;
             }
             
             // when writing properties, write them to the material used for rendering
@@ -45,7 +46,7 @@ public class PxImageShader : MonoBehaviour, IHavePxShaderMaterial
     {
         // force initialization at awake, at latest
         _ = PropertyBlock;
-        Image.material = ImageInstancedMaterial;
+        _ = ImageInstancedMaterial;
     }
 
     private void OnDestroy()
@@ -82,8 +83,6 @@ public class PxImageShader : MonoBehaviour, IHavePxShaderMaterial
         ImageInstancedMaterial.SetFloat("_TransparencyCutoff", PropertyBlock.GetFloat("_TransparencyCutoff"));
         ImageInstancedMaterial.SetFloat("_TransCutoffPos", PropertyBlock.GetFloat("_TransCutoffPos"));
         ImageInstancedMaterial.SetFloat("_TransCutoffGradient", PropertyBlock.GetFloat("_TransCutoffGradient"));
-            
-        Image.material = ImageInstancedMaterial;
     }
 
     public Sprite GetSprite()
