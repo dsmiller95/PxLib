@@ -16,7 +16,7 @@ public class PxImageShader : MonoBehaviour, IHavePxShaderMaterial
 
     [SerializeField] private Shader baseShader;
 
-    private static readonly string InstancedMaterialName = $"{nameof(PxImageShader)} instanced material";
+    private string InstancedMaterialName => $"{nameof(PxImageShader)} instanced material (obj id: {this.GetInstanceID()})";
     private Material _cachedMaterial;
     Material ImageInstancedMaterial
     {
